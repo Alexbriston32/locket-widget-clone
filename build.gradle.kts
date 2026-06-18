@@ -4,3 +4,17 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.9.24" apply false
     id("com.google.gms.google-services") version "4.4.2" apply false
 }
+
+// Ensure proper configuration for AndroidX across all modules
+subprojects {
+    configurations.all {
+        resolutionStrategy {
+            force("androidx.appcompat:appcompat:1.6.1")
+            force("androidx.core:core:1.13.1")
+        }
+    }
+}
+
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
+}
